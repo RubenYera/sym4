@@ -29,7 +29,26 @@ class AsignaturaController extends AbstractController
             );
         }
 
-        return $this->render('alumno/listaAsignaturas.html.twig', ['asignaturas' => $asignaturas]);
+        return $this->render('asignatura/listaAsignaturas.html.twig', ['asignaturas' => $asignaturas]);
+    }
+
+    /**
+     * @Route("/Asignatura/listaAsignaturasAlumno/{id_alumno}", name="asignatura_listaAsignaturasAlumno")
+     */
+    public function listaAsignaturasAlumno(ManagerRegistry $doctrine,int $id_alumno): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $alumno = $entityManager->getRepository(Alumno::class)->find($id_alumno);
+        $asignaturas = $alumno->getAsignatura();
+
+        if (!$asignaturas) {
+            throw $this->createNotFoundException(
+                'No hay asignaturas'
+            );
+        }
+
+        return $this->render('asignatura/listaAsignaturasAlumno.html.twig', ['asignaturas' => $asignaturas, 'alumno' => $alumno]);
     }
 
     /**
@@ -47,7 +66,7 @@ class AsignaturaController extends AbstractController
             );
         }
 
-        return $this->render('alumno/listaAsignatura.html.twig', ['asignatura' => $asignatura]);
+        return $this->render('asignatura/listaAsignatura.html.twig', ['asignatura' => $asignatura]);
     }
 
     /**

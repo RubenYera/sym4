@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Asignatura {{asignatura.id}} {% endblock %}
+
+{% block body %}
+            <h1>{{asignatura.id}} {{asignatura.descripcion}}</h1>
+
+            <li><a href="http://localhost:8000/Alumno/listaAlumnosAsignatura/{{asignatura.id}}">Alumnos de la asignatura</a></li>
+            </br>
+            <a href="http://localhost:8000/Alumno/listaAlumnos">Lista de Alumnos</a>
+            <a href="http://localhost:8000/Asignatura/listaAsignaturas">Lista de Asignaturas</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'asignatura/listaAsignaturas.html.twig' %}
+
+{% block title %}Asignaturas del alumno {{alumno.nombre}} {% endblock %}
+
+
+{% block body %}
+    <h1> Asignaturas del alumno {{alumno.nombre}} </h1>
+
+    {% block content %}
+
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

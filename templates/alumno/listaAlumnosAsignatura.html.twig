@@ -1,0 +1,12 @@
+{% extends 'alumno/listaAlumnos.html.twig' %}
+
+{% block title %}Alumnos de {{asignatura.descripcion}} {% endblock %}
+
+{% block body %}
+    <h1> Alumnos de {{asignatura.descripcion}}</h1>
+
+    {% block content %}
+
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

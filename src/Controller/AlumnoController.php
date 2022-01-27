@@ -33,6 +33,26 @@ class AlumnoController extends AbstractController
     }
 
     /**
+     * @Route("/Alumno/listaAlumnosAsignatura/{id_asignatura}", name="alumno_listaAlumnosAsignatura")
+     */
+    public function listaAlumnosAsignatura(ManagerRegistry $doctrine,int $id_asignatura): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $asignatura = $entityManager->getRepository(Asignatura::class)->find($id_asignatura);
+
+        $alumnos = $asignatura->getAlumnos();
+
+        if (!$alumnos) {
+            throw $this->createNotFoundException(
+                'No hay alumnos de la asignatura '.$asignatura->getDescripcion()
+            );
+        }
+
+        return $this->render('alumno/listaAlumnosAsignatura.html.twig', ['alumnos' => $alumnos,'asignatura'=>$asignatura]);
+    }
+
+    /**
      * @Route("/Alumno/listaAlumno/{id}", name="alumno_listaAlumno")
      */
     public function listaAlumno(ManagerRegistry $doctrine,int $id): Response
